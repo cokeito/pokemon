@@ -1,4 +1,5 @@
 class PokemonsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_pokemon, only: [:show, :edit, :update, :destroy]
 
   # GET /pokemons
