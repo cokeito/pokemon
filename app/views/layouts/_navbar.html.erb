@@ -12,8 +12,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="<%= root_path %>">Home</a></li>
               <% if user_signed_in? %>
+              <li> <a href="<%= catched_index_path %>"> Mis Pokemones </a></li>
               <li> <a href="<%= destroy_user_session_path %>" data-method='delete'>
               Logout
               </a></li>
