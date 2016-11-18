@@ -1,2 +1,61 @@
-<h1>Caughts#index</h1>
-<p>Find me in app/views/caughts/index.html.erb</p>
+
+<h1>Mis Pokemones - <small><%= @user.name %> </small></h1>
+
+<table class="table table-stripped table-condensed table-hover table-bordered">
+<thead>
+	<tr>
+		<td>Nombre Pokemon</td>
+		<td>Comentario</td>
+		<td>Nivel</td>
+		<td>Acciones</td>
+	</tr>
+</thead>
+
+<tbody>
+	<% @user.caughts.each do |p| %>
+	<tr>
+		<td><%= p.pokemon.name %></td>
+		<td><%= p.pokemon.description %></td>
+		<td><%= p.pokelevel == nil ? '0' : p.pokelevel %></td>	
+		<td><%= link_to "Subir Nivel Pokemon", raise_level_caught_path(p) , class: "btn btn-info" %></td>
+	</tr>
+	<% end %>
+</tbody>
+
+</table>
+
+<h2>Atrapar Pokemones</h2>
+
+
+<%= form_for(Caught.new) do |f| %>
+<table class="table table-stripped table-condensed table-hover table-bordered">
+<thead>
+	<tr>
+		<td>Acciones</td>
+		<td>Nombre Pokemon</td>
+		<td>Comentario</td>
+	</tr>
+</thead>
+<tbody>
+
+	<% @pokemons.each do |p| %>
+	<tr>
+		<td>
+		<%= check_box_tag 'pokemon_ids[]', p.id, false, :id => "pokemon_ids_#{p.id}", :class => 'form-control'  %>
+		
+		</td>
+		<td><%= "#{p.name} (#{p.id})" %></td>
+		<td><%= p.description %></td>
+	</tr>
+	<% end %>
+</tbody>
+<tfoot>
+	<tr>
+		<td colspan="3">
+			<%= f.submit 'Atrapar Pokemon', :class => 'btn btn-success pull-right' %>
+
+		</td>
+	</tr>	
+</tfoot>
+</table>
+<% end %>

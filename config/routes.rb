@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  get 'catched/index'
-  get 'caughts/index'
-  get 'catched/raise_level/:id', to: 'catched#raise_level', as: 'catched/raise_level'
+  
+  resources :caughts, only: [:index, :create] do
+  	member do 
+  		get 'raise_level'
+  	end
+
+  end
+
+  #creo recurso solo para la vista iindex del controller caughts
+
+  #get 'catched/raise_level/:id', to: 'catched#raise_level', as: 'catched/raise_level'
 
   #devise_for :users
   devise_for :users, controllers: { registrations: "users/registrations" }
